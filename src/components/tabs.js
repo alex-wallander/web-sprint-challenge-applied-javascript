@@ -2,25 +2,34 @@ import axios from "axios";
 
 const Tabs = (topics) => {
 
-  const topic = document.createElement('div');
-  const js = document.createElement('div');
-  const boot = document.createElement('div');
-  const tech = document.createElement('div');
+  const top = document.createElement('div');
+  const tab = document.createElement('div');
 
-  topic.classList.add('topics')
-  js.classList.add('tab')
-  boot.classList.add('tab')
-  tech.classList.add('tab');
+  top.classList.add('topics')
+  tab.classList.add('tab')
 
-  js.textContent = topics.javascript;
-  boot.textContent = topics.bootstrap;
-  tech.textContent = topics.technology;
+  tab.textContent = topics;
 
-  topic.appendChild(js)
-  topic.appendChild(boot)
-  topic.appendChild(tech)
+  top.appendChild(tab);
 
-  return topic;
+  return top;
+}
+
+const tabsAppender = (selector) => {
+  const tabsContain = document.querySelector(selector);
+  axios
+  .get('https://lambda-times-api.herokuapp.com/topics')
+  .then((res) => {
+    const topics = res.data.topics;
+      topics.forEach((top) =>{
+        tabsContain.appendChild(Tabs(top));
+      });
+  })
+  .catch((err) => {
+    console.log(err);
+  });
+};
+
   // TASK 3
   // ---------------------
   // Implement this function which takes an array of strings ("topics") as its only argument.
@@ -35,27 +44,6 @@ const Tabs = (topics) => {
   //   <div class="tab">technology</div>
   // </div>
   //
-}
-axios
-.get('https://lambda-times-api.herokuapp.com/topics')
-.then(() =>{})
-.catch(() =>{});
-
-const tabsContain = document.querySelector('.tabs-container')
-
-const tabsAppender = (selector) => {
-
-  tabsAppender.forEach(topics) => {
-    axios
-    .get(`https://lambda-times-api.herokuapp.com/${topics}`)
-    .then((res) =>{
-      console.log(res.data)
-      tabsContain.appendChild(Tabs(res.data))
-    })
-    .catch((err) =>{
-      console.log(err);
-    })
-  })
 
   // TASK 4
   // ---------------------
@@ -64,7 +52,7 @@ const tabsAppender = (selector) => {
   // Find the array of topics inside the response, and create the tabs using the Tabs component.
   // Append the tabs to the element in the DOM that matches the selector passed to the function.
   //
-}
+
 
 export { Tabs, tabsAppender }
 
