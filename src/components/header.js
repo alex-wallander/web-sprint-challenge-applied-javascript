@@ -17,6 +17,8 @@ const Header = (title, date, temp) => {
   head.appendChild(h1)
   head.appendChild(spanTwo)
 
+
+  document.querySelector('.header-container').appendChild(head);
   console.log(head)
   return head;
   // TASK 1
