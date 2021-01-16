@@ -25,6 +25,9 @@ const Header = (title, date, temp) => {
   h1.textContent = title;
   span.textContent = date;
   spanTwo.textContent = temp;
+  h1.textContent = 'Lambda Times'
+  span.textContent= 'January 15, 2021'
+  spanTwo.textContent = '24°'
 
   head.appendChild(span)
   head.appendChild(h1)
